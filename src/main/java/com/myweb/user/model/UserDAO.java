@@ -75,6 +75,79 @@ public class UserDAO {
 		
 	}
 	
+	public int userCheck(String id, String pw) {
+		int check = 0;
+		String sql = "SELECT user_pw FROM my_user "
+					+ "WHERE user_id=?";
+		
+		try(Connection conn = ds.getConnection();
+				PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			
+			pstmt.setString(1, id);
+			ResultSet rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				String dbpw = rs.getString("user_pw");
+				if(dbpw.equals(pw)) {
+					check = 1;
+				} else {
+					check = 0;
+				}
+				
+			} else {
+				check = -1;
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}	
+		
+		return check;
+	}
+
+	public UserVO getUserInfo(String id) {
+		UserVO user = null;
+		String sql = "SELECT * FROM my_user WHERE user_id='" + id + "'";
+		
+		try(Connection conn = ds.getConnection();
+				PreparedStatement pstmt = conn.prepareStatement(sql);
+				ResultSet rs = pstmt.executeQuery()) {
+			if(rs.next()) {
+				user = new UserVO(
+							rs.getString("user_id"),
+							rs.getString("user_pw"),
+							rs.getString("user_name"),
+							rs.getString("user_email"),
+							rs.getString("user_address")
+						);
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return user;
+	}
+	
+	public void changePassword(String pw) {
+		String sql = "UPDATE my_user SET user_pw WHERE user_id=?";
+		
+		try(Connection conn = ds.getConnection();
+				PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			
+			pstmt.setString(1, pw);
+			
+			pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		
+	}
+	
+	
+	
 }
 
 
