@@ -12,7 +12,7 @@ import com.myweb.user.model.UserVO;
 public class LoginService implements IUserService {
 
 	@Override
-	public void excute(HttpServletRequest request, HttpServletResponse response) {
+	public void execute(HttpServletRequest request, HttpServletResponse response) {
 
 		/*
 	    1. 파라미터값 얻어오기 (id, pw)

@@ -12,7 +12,7 @@ import com.myweb.user.model.UserVO;
 public class JoinService implements IUserService {
 
 	@Override
-	public void excute(HttpServletRequest request, HttpServletResponse response) {
+	public void execute(HttpServletRequest request, HttpServletResponse response) {
 		
 		String id = request.getParameter("id");
 		UserDAO dao = UserDAO.getInstance();

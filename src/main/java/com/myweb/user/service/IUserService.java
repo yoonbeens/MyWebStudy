@@ -11,6 +11,6 @@ public interface IUserService {
 	//void인 이유 -> 리턴할 일이 없음 -> 화면에 데이터 전달할 때는 내장객체(request, response)를 사용할 것이기 때문.
 	//매개변수 선언 -> Controller가 요청과 함께 전달받는 request와 response를
 	//서비스 계층으로 그대로 전달해서 사용할 수 있도록 선언.
-	void excute(HttpServletRequest request, HttpServletResponse response);
+	void execute(HttpServletRequest request, HttpServletResponse response);
 	
 }
