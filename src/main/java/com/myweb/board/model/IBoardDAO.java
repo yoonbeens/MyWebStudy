@@ -19,4 +19,10 @@ public interface IBoardDAO {
 	//글 삭제 요청을 처리할 메서드 delete
 	void deleteBoard(int bId);
 	
+	//글 검색 요청을 처리할 메서드 select
+	List<BoardVO> searchBoard(String keyword, String category);
+	
+	//조회수를 올려주는 메서드
+	void upHit(int bId);
+	
 }
