@@ -1,6 +1,5 @@
 package com.myweb.board.model;
 
-import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
 /*
