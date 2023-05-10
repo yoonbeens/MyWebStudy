@@ -28,38 +28,32 @@ public class ContentService implements IBoardService {
         */
 		
 		String cId = request.getParameter("bId");
-
-		Cookie cookies[] = request.getCookies();
-		
+		Cookie cookies[] = request.getCookies();		
 		boolean flag = false;
 		
 		if(cookies != null) {
 			for(Cookie c : cookies) {
-				if(c.getValue().equals(cId)) {
+				if(c.getName().equals(cId)) {
 					flag = true;
 					break;
 				}
 			}
-		}
-		
-		if(flag==false) {
-			dao.upHit(bId);
+			if(flag==false) {
+				Cookie hitCheck = new Cookie(cId, cId);
+				hitCheck.setMaxAge(15);
+				response.addCookie(hitCheck);
+				dao.upHit(bId);				
+			}
 			
-			Cookie hitCheck = new Cookie(cId, cId);
-			hitCheck.setMaxAge(15);
-			response.addCookie(hitCheck);
 		}
-		
 
-		
-
-		
 		BoardVO vo = dao.contentBoard(bId);
 		
 		//textarea의 줄 개행 기본값인 \r\n을 p태그의 기본값 <br>로 바꿔주기
 		vo.setContent(vo.getContent().replace("\r\n", "<br>"));
-
 		request.setAttribute("content", vo);
+		
+		
 	}
 
 }

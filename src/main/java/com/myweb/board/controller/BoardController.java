@@ -20,6 +20,7 @@ import com.myweb.board.service.UpdateService;
 
 
 @WebServlet("*.board")
+//@WebServlet(name = "boardcon")
 public class BoardController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
